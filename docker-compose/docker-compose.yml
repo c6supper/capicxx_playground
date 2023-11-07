@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+   capicxx_playground:
+      stdin_open: true
+      tty: true
+      command: [/bin/bash]
+      image: registry.cn-hangzhou.aliyuncs.com/c6supper/capicxx_playground:latest
+      container_name: capicxx_playground
+      cap_add:
+         - SYS_ADMIN 
+      network_mode: host
+      volumes:
+        - /home/c6supper/.capicxx_playground/capicxx_playground/code/:/code/
+      restart: always
+      environment:
+         RUN_AFTER_SIDECAR: 'no'
+         APP_USER: c6supper
+         PASS: none
+         HTTPS_PROXY: http://10.42.161.13:1080
+      logging:
+         driver: 'json-file'
+         options:
+            max-size: '10M'
+            max-file: '1024'
