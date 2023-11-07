@@ -18,6 +18,7 @@ services:
          APP_USER: ${APP_USER}
          PASS: ${PASS}
          HTTPS_PROXY: ${HTTPS_PROXY}
+         HTTP_PROXY: ${HTTP_PROXY}
       logging:
          driver: ${APP_LOGGING_DRIVER}
          options:

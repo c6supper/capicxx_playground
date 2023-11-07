@@ -58,3 +58,4 @@ add_executable(HelloWorldSomeIPService
 target_link_libraries(HelloWorldSomeIPService CommonAPI CommonAPI-SomeIP vsomeip)
 
 install(PROGRAMS build/HelloWorldService build/HelloWorldSomeIPService DESTINATION ../install/bin/)
+install(PROGRAMS build/HelloWorldSomeIPClient build/HelloWorldSomeIPClient DESTINATION ../install/bin/)

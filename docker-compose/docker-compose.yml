@@ -17,7 +17,8 @@ services:
          RUN_AFTER_SIDECAR: 'no'
          APP_USER: c6supper
          PASS: none
-         HTTPS_PROXY: http://10.42.161.13:1080
+         HTTPS_PROXY: http://192.168.0.110:1080
+         HTTP_PROXY: http://192.168.0.110:1080
       logging:
          driver: 'json-file'
          options:
