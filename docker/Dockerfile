@@ -9,7 +9,9 @@ RUN apt-get update && \
     locale-gen en_US.UTF-8 && echo "dash dash/sh boolean false" | debconf-set-selections && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
-    useradd --groups sudo -m -s /bin/bash $APP_USER && echo "$APP_USER:$PASS" | chpasswd && \
+    addgroup --gid 998 vboxsf && \
+    useradd --groups vboxsf --groups sudo -m -s /bin/bash $APP_USER && echo "$APP_USER:$PASS" | chpasswd && \
+    usermod -aG vboxsf $APP_USER && \
     ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 ARG LIVENESS_PROBE
