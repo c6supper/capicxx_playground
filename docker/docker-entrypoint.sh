@@ -9,7 +9,7 @@ patch_conf() {
     fi
     export DEBIAN_FRONTEND=noninteractive;
     DEBIAN_FRONTEND=noninteractive echo $PASS | sudo -S apt install -y unzip openjdk-8-jre git \
-    make libexpat1-dev cmake gcc g++ automake autoconf wget pkg-config && \
+    make libexpat1-dev cmake gcc g++ automake autoconf wget pkg-config curl && \
     echo $PASS | sudo -S dpkg-reconfigure --frontend noninteractive tzdata && \
     echo $PASS | sudo -S locale-gen en_US.UTF-8 && \
     cd $BUILD_DIR && cp -rf $CAPICXX_PLAYGROUND_DIR/examples ./ && \
