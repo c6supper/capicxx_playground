@@ -33,7 +33,7 @@ cd "$MYDIR"
 BASEDIR="$PWD"
 
 try() {
-    counter=0
+    local counter=0
     
     until [ $counter -gt $try_counter ]
     do
@@ -141,11 +141,11 @@ git_clone https://github.com/GENIVI/capicxx-dbus-runtime.git
 try wget -c http://dbus.freedesktop.org/releases/dbus/dbus-1.10.10.tar.gz
 try tar -xzf dbus-1.10.10.tar.gz
 cd dbus-1.10.10/ || fail
-set +e
+
 apply_patch ../capicxx-dbus-runtime/src/dbus-patches/capi-dbus-add-send-with-reply-set-notify.patch
 apply_patch ../capicxx-dbus-runtime/src/dbus-patches/capi-dbus-add-support-for-custom-marshalling.patch
 apply_patch ../capicxx-dbus-runtime/src/dbus-patches/capi-dbus-correct-dbus-connection-block-pending-call.patch
-set -e
+
 if $QUIET ; then
     try ./configure --prefix=${INSTALL_PREFIX} --without-systemdsystemunitdir >/dev/null
     try make -j$(nproc) >/dev/null
@@ -227,9 +227,9 @@ try cp "$BASEDIR/examples/CMakeLists.txt" .
 mkdir -p cgen
 cd cgen/ || fail
 
-try curl --retry $try_counter -fLo commonapi-generator.zip https://github.com/GENIVI/capicxx-core-tools/releases/download/$CORE_TOOLS_VERSION/commonapi-generator.zip
-try curl --retry $try_counter -fLo commonapi_dbus_generator.zip https://github.com/GENIVI/capicxx-dbus-tools/releases/download/$DBUS_TOOLS_VERSION/commonapi_dbus_generator.zip
-try curl --retry $try_counter -fLo commonapi_someip_generator.zip https://github.com/GENIVI/capicxx-someip-tools/releases/download/$SOMEIP_TOOLS_VERSION/commonapi_someip_generator.zip
+try wget -c https://github.com/GENIVI/capicxx-core-tools/releases/download/$CORE_TOOLS_VERSION/commonapi-generator.zip
+try wget -c commonapi_dbus_generator.zip https://github.com/GENIVI/capicxx-dbus-tools/releases/download/$DBUS_TOOLS_VERSION/commonapi_dbus_generator.zip
+try curl --retry $try_counter -fLOC - https://github.com/GENIVI/capicxx-someip-tools/releases/download/$SOMEIP_TOOLS_VERSION/commonapi_someip_generator.zip
 try unzip -u commonapi-generator.zip -d commonapi-generator
 try unzip -u commonapi_dbus_generator.zip -d commonapi_dbus_generator
 try unzip -u commonapi_someip_generator.zip -d commonapi_someip_generator
