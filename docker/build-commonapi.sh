@@ -217,9 +217,9 @@ try cp "$BASEDIR/examples/CMakeLists.txt" .
 mkdir -p cgen
 cd cgen/ || fail
 
-try curl -Lo commonapi-generator.zip https://github.com/GENIVI/capicxx-core-tools/releases/download/$CORE_TOOLS_VERSION/commonapi-generator.zip
-try curl -Lo commonapi_dbus_generator.zip https://github.com/GENIVI/capicxx-dbus-tools/releases/download/$DBUS_TOOLS_VERSION/commonapi_dbus_generator.zip
-try curl -Lo commonapi_someip_generator.zip https://github.com/GENIVI/capicxx-someip-tools/releases/download/$SOMEIP_TOOLS_VERSION/commonapi_someip_generator.zip
+try curl -fLo commonapi-generator.zip https://github.com/GENIVI/capicxx-core-tools/releases/download/$CORE_TOOLS_VERSION/commonapi-generator.zip
+try curl -fLo commonapi_dbus_generator.zip https://github.com/GENIVI/capicxx-dbus-tools/releases/download/$DBUS_TOOLS_VERSION/commonapi_dbus_generator.zip
+try curl -fLo commonapi_someip_generator.zip https://github.com/GENIVI/capicxx-someip-tools/releases/download/$SOMEIP_TOOLS_VERSION/commonapi_someip_generator.zip
 try unzip -u commonapi-generator.zip -d commonapi-generator
 try unzip -u commonapi_dbus_generator.zip -d commonapi_dbus_generator
 try unzip -u commonapi_someip_generator.zip -d commonapi_someip_generator
