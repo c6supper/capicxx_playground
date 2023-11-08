@@ -118,7 +118,7 @@ cmake_build() {
 # Build Common API C++ Runtime
 echo Building CommonAPI Core Runtime
 cd "$BASEDIR" || fail
-git config --global --add safe.directory ./capicxx-core-runtime && \
+git config --global --add safe.directory $BASEDIR/capicxx-core-runtime && \
 git_clone https://github.com/GENIVI/capicxx-core-runtime.git
 cd capicxx-core-runtime/ || fail
 git checkout $CORE_RUNTIME_VERSION || fail "capicxx-core: Failed git checkout of $CORE_RUNTIME_VERSION"
@@ -130,7 +130,7 @@ check_expected "${INSTALL_PREFIX}/lib/libCommonAPI.so"
 echo Building D-Bus
 # first patched D-Bus library...
 cd "$BASEDIR" || fail
-git config --global --add safe.directory ./capicxx-dbus-runtime && \
+git config --global --add safe.directory $BASEDIR/capicxx-dbus-runtime && \
 git_clone https://github.com/GENIVI/capicxx-dbus-runtime.git
 try wget -c http://dbus.freedesktop.org/releases/dbus/dbus-1.10.10.tar.gz
 try tar -xzf dbus-1.10.10.tar.gz
@@ -195,7 +195,7 @@ check_expected $BASEDIR/install/lib/libvsomeip.so
 # build SomeIP CommonAPI Runtime
 echo CommonAPI SOME/IP Runtime
 cd "$BASEDIR" || fail
-git config --global --add safe.directory ./capicxx-someip-runtime && \
+git config --global --add safe.directory $BASEDIR/capicxx-someip-runtime && \
 git_clone https://github.com/GENIVI/capicxx-someip-runtime.git
 cd capicxx-someip-runtime
 git checkout $SOMEIP_RUNTIME_VERSION || fail "capicxx-dbus: Failed git checkout of $SOMEIP_RUNTIME_VERSION"
