@@ -228,7 +228,7 @@ mkdir -p cgen
 cd cgen/ || fail
 
 try wget -c https://github.com/GENIVI/capicxx-core-tools/releases/download/$CORE_TOOLS_VERSION/commonapi-generator.zip
-try wget -c commonapi_dbus_generator.zip https://github.com/GENIVI/capicxx-dbus-tools/releases/download/$DBUS_TOOLS_VERSION/commonapi_dbus_generator.zip
+try wget -c https://github.com/GENIVI/capicxx-dbus-tools/releases/download/$DBUS_TOOLS_VERSION/commonapi_dbus_generator.zip
 try curl --retry $try_counter -fLOC - https://github.com/GENIVI/capicxx-someip-tools/releases/download/$SOMEIP_TOOLS_VERSION/commonapi_someip_generator.zip
 try unzip -u commonapi-generator.zip -d commonapi-generator
 try unzip -u commonapi_dbus_generator.zip -d commonapi_dbus_generator
@@ -361,4 +361,3 @@ cd "$BASEDIR" || fail
 echo "Checking a few results (were libraries compiled and installed?)"
 test -f install/lib/libboost_log.so|| fail "Could not find libboost_log.so in install/lib?  Something probably went wrong"
 test -f install/lib/libvsomeip.so  || fail "Could not find libvsomeip.so in install/lib?  Something probably went wrong"
-
