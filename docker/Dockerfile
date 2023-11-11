@@ -4,15 +4,17 @@ FROM ubuntu:${UBUNTU_VER} AS prepare-builder
 ARG DEBIAN_FRONTEND=noninteractive
 ARG APP_USER=c6supper
 ARG PASS="none"
+ARG VBOX_GROUPID
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install locales xz-utils tzdata sudo; \
     locale-gen en_US.UTF-8 && echo "dash dash/sh boolean false" | debconf-set-selections && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
-    addgroup --gid 998 vboxsf && \
-    useradd --groups vboxsf --groups sudo -m -s /bin/bash $APP_USER && echo "$APP_USER:$PASS" | chpasswd && \
-    usermod -aG vboxsf $APP_USER && \
-    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+    ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime; \
+    if [ ! -z "$VBOX_GROUPID" ] ; then groupadd --gid "$VBOX_GROUPID" vboxsf && \
+        useradd --groups vboxsf --groups sudo -m -s /bin/bash $APP_USER && echo "$APP_USER:$PASS" | chpasswd && \
+        usermod -aG vboxsf $APP_USER; fi
+    
 
 ARG LIVENESS_PROBE
 
