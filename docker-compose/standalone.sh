@@ -24,6 +24,8 @@ env | while read line; do
   fi
 done
 
+VBOX_GROUPID=$(getent group vboxsf | cut -d: -f3)
+
 #generate the yaml file, and validate the configuration
 cat capicxx_playground.template.yaml | DOLLAR='$' envsubst > docker-compose.yml
 docker-compose -f docker-compose.yml config > /dev/null

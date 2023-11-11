@@ -12,6 +12,8 @@ patch_conf() {
     make libexpat1-dev cmake gcc g++ automake autoconf wget pkg-config curl && \
     echo $PASS | sudo -S dpkg-reconfigure --frontend noninteractive tzdata && \
     echo $PASS | sudo -S locale-gen en_US.UTF-8 && \
+    if [[ ("$VBOX_GROUPID" != "") && ($(getent group vboxsf) == "") ]] ; then echo $PASS | sudo -S groupadd --gid "$VBOX_GROUPID" vboxsf && \
+        echo $PASS | sudo -S usermod -aG vboxsf $APP_USER; fi && \
     cd $BUILD_DIR && cp -rf $CAPICXX_PLAYGROUND_DIR/examples ./ && \
     cp -rf $CAPICXX_PLAYGROUND_DIR/patch ./ && \
     cp -rf $CAPICXX_PLAYGROUND_DIR/build-commonapi.sh ./ && \

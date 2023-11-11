@@ -9,8 +9,6 @@ if [ "$#" -lt  "2" ]
     exit
 fi
 
-VBOX_GROUPID=$(getent group vboxsf | cut -d: -f3)
-
 # Retries a command on failure.
 # $1 - the max number of attempts
 # $2... - the command to run
@@ -38,19 +36,7 @@ version=$(cat docker/version)
 echo "version: $version"
 DIR="$(dirname "$(readlink -f "$0")")"
 
-if [ -z $VBOX_GROUPID]
-then
-    docker build -t $NAME/$IMAGE -t \
-        $NAME/$IMAGE:$version -f ./docker/Dockerfile ./ \
-        --build-arg LIVENESS_PROBE="$(cat ${DIR}/tcp-port-wait.sh)"
-else
-    docker build -t $NAME/$IMAGE -t \
-        $NAME/$IMAGE:$version -f ./docker/Dockerfile ./ \
-        --build-arg LIVENESS_PROBE="$(cat ${DIR}/tcp-port-wait.sh)" \
-        --build-arg VBOX_GROUPID=$VBOX_GROUPID
-fi
-
-
+docker build -t $NAME/$IMAGE -t $NAME/$IMAGE:$version -f ./docker/Dockerfile ./ --build-arg LIVENESS_PROBE="$(cat ${DIR}/tcp-port-wait.sh)"
 
 if [ "$#" -ge  "2" ]
   then

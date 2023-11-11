@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
    capicxx_playground:
@@ -8,17 +8,18 @@ services:
       image: registry.cn-hangzhou.aliyuncs.com/c6supper/capicxx_playground:${CAPICXX_PLAYGROUND_ENV_TAG}
       container_name: capicxx_playground
       cap_add:
-         - SYS_ADMIN 
+         - SYS_ADMIN
       network_mode: ${APP_NETWORK_MODE}
       volumes:
-        - ${CAPICXX_PLAYGROUND_ENV_CODE_VOLUME}:${CAPICXX_PLAYGROUND_ENV_DIR}
+         - ${CAPICXX_PLAYGROUND_ENV_CODE_VOLUME}:${CAPICXX_PLAYGROUND_ENV_DIR}
       restart: ${APP_RESTART_POLICY}
       environment:
-         RUN_AFTER_SIDECAR: 'no'
+         RUN_AFTER_SIDECAR: "no"
          APP_USER: ${APP_USER}
          PASS: ${PASS}
          https_proxy: ${HTTPS_PROXY}
          http_proxy: ${HTTP_PROXY}
+         VBOX_GROUPID: ${VBOX_GROUPID}
       logging:
          driver: ${APP_LOGGING_DRIVER}
          options:
